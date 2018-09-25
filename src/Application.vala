@@ -50,6 +50,7 @@ class Application: Gtk.Application {
 		set_accels_for_action("win.save", {"<Primary>S"});
 		set_accels_for_action("win.save-as", {"<Primary><Shift>S"});
 		set_accels_for_action("win.find", {"<Primary>F"});
+		set_accels_for_action("app.quit", {"<Primary>Q"});
 
 		unowned string core_binary = GLib.Environment.get_variable("XI_CORE");
 		if (core_binary == null) {

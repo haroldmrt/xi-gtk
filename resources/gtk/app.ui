@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkImage" id="new_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-new-symbolic</property>
+  </object>
+  <object class="GtkImage" id="open_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-open-symbolic</property>
+  </object>
+  <object class="GtkPopoverMenu" id="popover_menu">
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="width_request">200</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="action_name">win.save</property>
+            <property name="text" translatable="yes">Save</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="action_name">win.save-as</property>
+            <property name="text" translatable="yes">Save as</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="action_name">app.quit</property>
+            <property name="text" translatable="yes">Quit</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="submenu">main</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+  </object>
+  <object class="GtkImage" id="save_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-save-symbolic</property>
+  </object>
+  <template class="XiWindow" parent="GtkApplicationWindow">
+    <property name="can_focus">False</property>
+    <property name="default_width">800</property>
+    <property name="default_height">550</property>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="header_bar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="title" translatable="yes">Xi-gtk</property>
+        <property name="show_close_button">True</property>
+        <child>
+          <object class="GtkButton" id="new_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">New file</property>
+            <property name="action_name">win.new-tab</property>
+            <property name="image">new_image</property>
+            <property name="use_underline">True</property>
+            <property name="always_show_image">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="open_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Open file</property>
+            <property name="action_name">win.open</property>
+            <property name="image">open_image</property>
+            <property name="always_show_image">True</property>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkMenuButton" id="popover_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="popover">popover_menu</property>
+            <signal name="clicked" handler="gtk_widget_show" object="popover_menu" swapped="no"/>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">open-menu-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="save_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Save file</property>
+            <property name="action_name">win.save</property>
+            <property name="image">save_image</property>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+  </template>
+</interface>

@@ -14,17 +14,34 @@
 
 namespace Xi {
 
+[GtkTemplate (ui = "/com/github/eyelash/xi-gtk/gtk/app.ui")]
 class Window: Gtk.ApplicationWindow {
 	private CoreConnection core_connection;
 	private Xi.Notebook notebook;
+
+	[GtkChild]
+	Gtk.Button new_button;
+
+	[GtkChild]
+	Gtk.Button open_button;
+
+	[GtkChild]
+	Gtk.Button save_button;
+
+    [GtkChild]
+	Gtk.MenuButton popover_button;
+	
+	[GtkChild]
+	Gtk.PopoverMenu popover_menu;
 
 	public Window(Gtk.Application application, CoreConnection core_connection) {
 		Object(application: application);
 		this.core_connection = core_connection;
 
-		set_default_size(800, 550);
+		notebook = new Xi.Notebook();
+		add(notebook);
 
-		// actions
+		// Actions
 		var new_tab_action = new SimpleAction("new-tab", null);
 		new_tab_action.activate.connect(() => {
 			add_new_tab();
@@ -57,26 +74,6 @@ class Window: Gtk.ApplicationWindow {
 			notebook.get_current_edit_view().show_find_bar();
 		});
 		add_action(find_action);
-
-		var header_bar = new Gtk.HeaderBar();
-		header_bar.show_close_button = true;
-		header_bar.title = "Xi";
-		var new_button = new Gtk.Button.from_icon_name("document-new-symbolic", Gtk.IconSize.BUTTON);
-		new_button.tooltip_text = "New File";
-		new_button.action_name = "win.new-tab";
-		header_bar.pack_start(new_button);
-		var open_button = new Gtk.Button.from_icon_name("document-open-symbolic", Gtk.IconSize.BUTTON);
-		open_button.tooltip_text = "Open File";
-		open_button.action_name = "win.open";
-		header_bar.pack_start(open_button);
-		var save_button = new Gtk.Button.from_icon_name("document-save-symbolic", Gtk.IconSize.BUTTON);
-		save_button.tooltip_text = "Save File";
-		save_button.action_name = "win.save";
-		header_bar.pack_end(save_button);
-		set_titlebar(header_bar);
-
-		notebook = new Xi.Notebook();
-		add(notebook);
 	}
 
 	public void add_new_tab(File? file = null) {
