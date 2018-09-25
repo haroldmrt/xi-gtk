@@ -62,11 +62,13 @@ class Window: Gtk.ApplicationWindow {
 		var save_action = new SimpleAction("save", null);
 		save_action.activate.connect(() => {
 			notebook.get_current_edit_view().get_edit_view().save();
+			notebook.get_current_edit_view().get_edit_view().grab_focus();
 		});
 		add_action(save_action);
 		var save_as_action = new SimpleAction("save-as", null);
 		save_as_action.activate.connect(() => {
 			notebook.get_current_edit_view().get_edit_view().save_as();
+			notebook.get_current_edit_view().get_edit_view().grab_focus();
 		});
 		add_action(save_as_action);
 		var find_action = new SimpleAction("find", null);
