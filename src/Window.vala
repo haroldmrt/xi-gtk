@@ -34,6 +34,10 @@ class Window: Gtk.ApplicationWindow {
 	[GtkChild]
 	Gtk.PopoverMenu popover_menu;
 
+	static construct {
+		set_css_name("xi-window");
+	}
+
 	public Window(Gtk.Application application, CoreConnection core_connection) {
 		Object(application: application);
 		this.core_connection = core_connection;
@@ -76,6 +80,17 @@ class Window: Gtk.ApplicationWindow {
 			notebook.get_current_edit_view().show_find_bar();
 		});
 		add_action(find_action);
+		var close_current_tab_action = new SimpleAction("close-current-tab", null);
+		close_current_tab_action.activate.connect(() => {
+			close_current_tab();
+			notebook.get_current_edit_view().get_edit_view().grab_focus();
+		});
+		add_action(close_current_tab_action);
+		var close_all_tabs_action = new SimpleAction("close-all-tabs", null);
+		close_all_tabs_action.activate.connect(() => {
+			close_all_tabs();
+		});
+		add_action(close_all_tabs_action);
 	}
 
 	public void add_new_tab(File? file = null) {
@@ -83,6 +98,22 @@ class Window: Gtk.ApplicationWindow {
 			string view_id = core_connection.send_new_view.end(res);
 			this.notebook.add_edit_view(core_connection, view_id, file);
 		});
+	}
+
+	[Signal(action = true)]
+	public virtual signal void close_current_tab() {
+		notebook.remove_page(notebook.get_current_page());
+	}
+
+	public void close_all_tabs() {
+		int index;
+		while (true) {
+			index = notebook.get_current_page();
+			if (index == -1) {
+				break;
+			}
+			notebook.remove_page(index);
+		}
 	}
 }
 

@@ -45,3 +45,11 @@
 xi-editview {
 	-gtk-key-bindings: xi-editview-bindings;
 }
+
+@binding-set xi-window-bindings {
+	bind "<Primary>W" { "close-current-tab"() };
+}
+
+xi-window {
+	-gtk-key-bindings: xi-window-bindings;
+}
